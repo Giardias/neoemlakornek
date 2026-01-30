@@ -1,0 +1,742 @@
+/* ==================== ADMIN PANEL CSS (admin.html ve admin-login.html için) ==================== */
+
+/* ==================== ADMIN LOGIN PAGE STYLES ==================== */
+:root {
+    --admin-bg: #0F172A;
+    --admin-surface: #1E293B;
+    --admin-accent: #C5A059;
+    --admin-text: #F1F5F9;
+    --admin-muted: #94A3B8;
+    --admin-success: #10B981;
+    --admin-error: #EF4444;
+    --admin-warning: #F59E0B;
+    --admin-border: #334155;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Security Overlay */
+.security-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(15, 23, 42, 0.95) 0%, 
+        rgba(30, 41, 59, 0.95) 100%);
+    z-index: -1;
+}
+
+/* Login Container */
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    background: var(--admin-surface);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--admin-border);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Security Badge */
+.security-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--admin-success);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Header */
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--admin-accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.logo-text span {
+    color: var(--admin-accent);
+}
+
+.login-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--admin-text);
+}
+
+.login-header p {
+    color: var(--admin-muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--admin-text);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--admin-border);
+    border-radius: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    color: var(--admin-text);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--admin-accent);
+    box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-input::placeholder {
+    color: var(--admin-muted);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--admin-muted);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--admin-text);
+}
+
+/* Password Strength */
+.password-strength {
+    margin-top: 10px;
+    height: 4px;
+    background: var(--admin-border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease, background 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-text {
+    font-size: 12px;
+    color: var(--admin-muted);
+    margin-top: 6px;
+    text-align: right;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 18px;
+    background: var(--admin-accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background: #B48F45;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--admin-error);
+    color: #FCA5A5;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 20px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    animation: shake 0.5s ease;
+}
+
+.error-message.show {
+    display: flex;
+}
+
+/* Security Info */
+.security-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border-left: 4px solid var(--admin-accent);
+}
+
+.security-info h4 {
+    color: var(--admin-accent);
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.security-info ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--admin-muted);
+    line-height: 1.6;
+}
+
+.security-info li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.security-info li::before {
+    content: "•";
+    color: var(--admin-accent);
+    font-weight: bold;
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--admin-border);
+}
+
+.back-link a {
+    color: var(--admin-accent);
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Attempt Counter */
+.attempt-counter {
+    text-align: center;
+    font-size: 13px;
+    color: var(--admin-muted);
+    margin-top: 15px;
+    display: none;
+}
+
+.attempt-counter.show {
+    display: block;
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* Security Features */
+.security-features {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.security-tag {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--admin-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--admin-border);
+}
+
+/* ==================== ADMIN PANEL PAGE STYLES ==================== */
+/* TEMEL STİLLER (admin.html) */
+body { 
+    background: #F1F5F9; 
+    font-family: 'Manrope', sans-serif; 
+    padding: 20px; 
+    color: #334155; 
+}
+
+.admin-container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    display: grid; 
+    gap: 30px; 
+}
+
+.panel { 
+    background: white; 
+    padding: 35px; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+    border-top: 5px solid #0F172A; 
+}
+
+h2 { 
+    color: #0F172A; 
+    margin-bottom: 25px; 
+    border-bottom: 2px solid #E2E8F0; 
+    padding-bottom: 15px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+}
+
+/* FORM STİLLERİ */
+.form-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px; 
+}
+
+input, select, textarea { 
+    width: 100%; 
+    padding: 14px; 
+    border: 1px solid #CBD5E1; 
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+    font-size: 14px; 
+    outline: none; 
+    transition: 0.3s; 
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus { 
+    border-color: #C5A059; 
+    box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.1); 
+}
+
+label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 700; 
+    color: #475569; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+}
+
+/* VİTRİN KUTUCUĞU STİLİ */
+.checkbox-wrapper {
+    grid-column: 1 / -1;
+    background: #F0FDF4;
+    border: 2px solid #10B981;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.checkbox-wrapper input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+}
+.checkbox-wrapper label {
+    margin: 0;
+    font-size: 16px;
+    color: #064E3B;
+    cursor: pointer;
+    text-transform: none;
+}
+
+.file-upload-wrapper { 
+    position: relative; 
+    height: 140px; 
+    border: 2px dashed #CBD5E1; 
+    border-radius: 8px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    background: #F8FAFC; 
+    overflow: hidden; 
+}
+
+.file-upload-wrapper:hover { 
+    border-color: #C5A059; 
+    background: #FFF; 
+}
+
+.file-upload-wrapper input { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    opacity: 0; 
+    cursor: pointer; 
+    z-index: 10; 
+}
+
+.preview-gallery { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 15px; 
+    flex-wrap: wrap; 
+}
+
+.thumb-wrapper { 
+    position: relative; 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    border: 1px solid #E2E8F0; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+.thumb-wrapper img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.btn-remove-img { 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    background: #EF4444; 
+    color: white; 
+    border: none; 
+    width: 24px; 
+    height: 24px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 5; 
+    font-size: 12px;
+}
+
+.btn-submit { 
+    background: #10B981; 
+    color: white; 
+    border: none; 
+    padding: 16px; 
+    width: 100%; 
+    border-radius: 8px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: 0.3s; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 20px;
+}
+
+.btn-submit:hover { 
+    background: #059669; 
+    transform: translateY(-2px); 
+}
+
+.btn-submit.update-mode { 
+    background: #F59E0B; 
+}
+
+.btn-cancel { 
+    background: #64748B; 
+    color: white; 
+    border: none; 
+    padding: 16px; 
+    width: 100%; 
+    border-radius: 8px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    margin-top: 10px; 
+    display: none; 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 15px; 
+}
+
+th { 
+    text-align: left; 
+    padding: 15px; 
+    background: #F8FAFC; 
+    color: #64748B; 
+    font-size: 12px; 
+    border-bottom: 2px solid #E2E8F0; 
+    text-transform: uppercase; 
+}
+
+td { 
+    padding: 15px; 
+    border-bottom: 1px solid #E2E8F0; 
+    font-size: 14px; 
+    color: #334155; 
+    vertical-align: middle; 
+}
+
+.action-btns { 
+    display: flex; 
+    gap: 8px; 
+}
+
+.btn-edit { 
+    background: #3B82F6; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: 700; 
+    font-size: 12px; 
+}
+
+.btn-delete { 
+    background: #EF4444; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: 700; 
+    font-size: 12px; 
+}
+
+.list-thumb { 
+    width: 60px; 
+    height: 60px; 
+    object-fit: cover; 
+    border-radius: 6px; 
+    border: 1px solid #E2E8F0; 
+}
+
+.btn-reset { 
+    background: #64748B; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: bold; 
+    transition:0.3s; 
+}
+
+.btn-reset:hover { 
+    background: #475569; 
+    transform: translateY(-1px); 
+}
+
+#logoutBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #EF4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Login Page Specific Body */
+body.login-page-body {
+    background: var(--admin-bg);
+    font-family: 'Manrope', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--admin-text);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 20px;
+    }
+    
+    .logo-text {
+        font-size: 24px;
+    }
+    
+    .login-header h1 {
+        font-size: 20px;
+    }
+    
+    .security-features {
+        display: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .login-container {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .security-features,
+    .btn-submit,
+    .toggle-password {
+        display: none !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --admin-bg: #000000;
+        --admin-surface: #111111;
+        --admin-accent: #FFD700;
+        --admin-text: #FFFFFF;
+        --admin-muted: #CCCCCC;
+        --admin-border: #444444;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+}
